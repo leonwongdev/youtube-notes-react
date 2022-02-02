@@ -2,8 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchStreams } from '../../actions';
+import Modal from '../Modal';
+import history from '../../history';
 
 class StreamList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { showedTutorial: true };
+  }
+
   componentDidMount() {
     this.props.fetchStreams();
   }
@@ -73,12 +80,76 @@ class StreamList extends React.Component {
     }
   }
 
+  renderTutorialButton() {
+    return (
+      <div style={{ textAlign: 'left' }}>
+        <button
+          className="ui button green"
+          onClick={() => {
+            this.setState(() => {
+              return {
+                showedTutorial: false,
+              };
+            });
+          }}
+        >
+          Tutorial
+        </button>
+      </div>
+    );
+  }
+
+  renderTutorialContent = () => {
+    return (
+      <div>
+        <p>
+          Sign in with Google account to add/edit/delete your own video notes.
+        </p>
+        <p>
+          Your Google account will only be used to create an user id for
+          identifying your video notes. No personal data is collected.
+        </p>
+      </div>
+    );
+  };
+
+  onDismissModal = () => {
+    this.setState(() => {
+      console.log(this.state.showedTutorial);
+      return {
+        showedTutorial: true,
+      };
+    });
+  };
+
+  renderTutorialModal = () => {
+    if (this.state.showedTutorial) {
+      return;
+    }
+    return (
+      <Modal
+        title="How to use this app?"
+        content={this.renderTutorialContent()}
+        actions={
+          <div>
+            <button className="ui button" onClick={this.onDismissModal}>
+              Dismiss
+            </button>
+          </div>
+        }
+        onDismiss={this.onDismissModal}
+      />
+    );
+  };
+
   render() {
     return (
       <div>
         <h2>Streams</h2>
+        {this.renderTutorialButton()}
         <div className="ui celled list">{this.renderList()}</div>
         {this.renderCreate()}
+        {this.renderTutorialModal()}
       </div>
     );
   }
