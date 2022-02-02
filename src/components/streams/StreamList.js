@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchStreams } from '../../actions';
 import Modal from '../Modal';
-import history from '../../history';
 
 class StreamList extends React.Component {
   constructor(props) {
