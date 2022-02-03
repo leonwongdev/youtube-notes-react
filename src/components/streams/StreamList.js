@@ -102,6 +102,11 @@ class StreamList extends React.Component {
     return (
       <div>
         <p>
+          This is a demo app for react crud application. You can add your
+          favorite CS youtube video to the list or view other users' favorite
+          videos. You can also add your own reviews/notes to the video item.
+        </p>
+        <p>
           Sign in with Google account to add/edit/delete your own video notes.
         </p>
         <p>
@@ -130,11 +135,11 @@ class StreamList extends React.Component {
         title="How to use this app?"
         content={this.renderTutorialContent()}
         actions={
-          <div>
+          <React.Fragment>
             <button className="ui button" onClick={this.onDismissModal}>
               Dismiss
             </button>
-          </div>
+          </React.Fragment>
         }
         onDismiss={this.onDismissModal}
       />
