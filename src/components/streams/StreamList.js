@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchStreams } from '../../actions';
-import Modal from '../Modal';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchStreams } from "../../actions";
+import Modal from "../Modal";
 
 class StreamList extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class StreamList extends React.Component {
     return this.props.streams.map((stream) => {
       const content =
         stream.description.length > 100
-          ? stream.description.substring(0, 100) + ' ... Read More'
+          ? stream.description.substring(0, 100) + " ... Read More"
           : stream.description;
       return (
         <div className="item" key={stream.id}>
@@ -70,7 +70,7 @@ class StreamList extends React.Component {
   renderCreate() {
     if (this.props.isSignedIn && this.props.streams.length) {
       return (
-        <div style={{ textAlign: 'right' }}>
+        <div style={{ textAlign: "right" }}>
           <Link to="/streams/new" className="ui button primary">
             Add Your Favorite CS Video
           </Link>
@@ -81,7 +81,7 @@ class StreamList extends React.Component {
 
   renderTutorialButton() {
     return (
-      <div style={{ textAlign: 'left' }}>
+      <div style={{ textAlign: "left" }}>
         <button
           className="ui button green"
           onClick={() => {
@@ -113,6 +113,10 @@ class StreamList extends React.Component {
           Your Google account will only be used to create an user id for
           identifying your video notes. No personal data is collected.
         </p>
+        <i className="github icon"></i>
+        <a href="https://github.com/leonwongprsn/react-crud-videonote-app">
+          Github repo
+        </a>
       </div>
     );
   };
