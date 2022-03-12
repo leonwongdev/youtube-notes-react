@@ -37,7 +37,7 @@ export const fetchStreams = () => async (dispatch) => {
         // console.log("fetchStreams response", response);
         dispatch({ type: FETCH_STREAMS, payload: response.data });
     } catch (error) {
-        alert(error + " Fail to fetch a list of streams.");
+        alert(error + " Fail to fetch a list of notes.");
     }
 };
 

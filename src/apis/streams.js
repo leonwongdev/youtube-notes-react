@@ -5,5 +5,5 @@ import axios from "axios";
 // });
 
 export default axios.create({
-    baseURL: "https://youtube-note-server.herokuapp.com/",
+    baseURL: "https://youtube-note-server.herokuapp.com/api/",
 });

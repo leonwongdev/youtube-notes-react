@@ -5,23 +5,7 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import htmlToDraft from "html-to-draftjs";
 import "../style/editor.css";
-import { convertFromRaw } from "draft-js";
-
-let defaultNote = {
-    entityMap: {},
-    blocks: [
-        {
-            key: "637gr",
-            text: "Type your notes here.",
-            type: "unstyled",
-            depth: 0,
-            inlineStyleRanges: [],
-            entityRanges: [],
-            data: {},
-        },
-    ],
-    html: "<div>No notes here</div>",
-};
+// import { convertFromRaw } from "draft-js";
 
 let defaultContent = "<div>Type your notes here</div>";
 
@@ -78,7 +62,7 @@ class EditorConvertToHTML extends Component {
     };
 
     render() {
-        const { editorState, contentState } = this.state;
+        const { editorState } = this.state;
         return (
             <div>
                 <Editor

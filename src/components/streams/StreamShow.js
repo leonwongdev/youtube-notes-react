@@ -91,7 +91,7 @@ class StreamShow extends React.Component {
             return <div>Loading...</div>;
         }
 
-        const { title, description, url, note } = this.props.stream;
+        const { url } = this.props.stream;
 
         const embededUrl = url.replace(
             "https://www.youtube.com/watch?v=",
