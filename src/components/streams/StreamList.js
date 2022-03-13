@@ -168,7 +168,6 @@ class StreamList extends React.Component {
     };
 
     render() {
-        console.log(this.auth);
         return (
             <div>
                 {this.props.isSignedIn && (

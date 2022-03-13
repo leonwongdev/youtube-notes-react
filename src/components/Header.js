@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import SignOut from "./auth/SignOut";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
+import firebaseApp from "../firebase/Firebase";
+import { getAuth } from "firebase/auth";
 
 const Header = (props) => {
+    const auth = getAuth(firebaseApp);
+    const handleAuthChange = useRef(() => {});
+
+    useEffect(() => {
+        const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
+            handleAuthChange.current(!!user);
+        });
+        return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+    }, [auth]);
+
+    handleAuthChange.current = (isSignedIn) => {
+        if (isSignedIn) {
+            props.signIn(auth.currentUser.uid);
+        } else {
+            props.signOut();
+        }
+    };
+
     const renderSignInButton = () => {
         if (!props.isSignedIn) {
             return (
