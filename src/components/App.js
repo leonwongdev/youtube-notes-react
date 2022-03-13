@@ -8,6 +8,7 @@ import StreamShow from "./streams/StreamShow";
 import Header from "./Header";
 import history from "../history";
 import "../style/app.css";
+import SignIn from "./auth/SignIn";
 
 const App = () => {
     return (
@@ -37,6 +38,7 @@ const App = () => {
                             exact
                             component={StreamShow}
                         />
+                        <Route path="/signIn" exact component={SignIn} />
                     </Switch>
                 </div>
             </Router>

@@ -3,11 +3,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchStreams } from "../../actions";
 import Modal from "../Modal";
+import firebaseApp from "../../firebase/Firebase";
+import { getAuth } from "firebase/auth";
 
 class StreamList extends React.Component {
     constructor(props) {
         super(props);
         this.state = { showedTutorial: true };
+        this.auth = getAuth(firebaseApp);
     }
 
     componentDidMount() {
@@ -111,13 +114,12 @@ class StreamList extends React.Component {
                     reviews/notes to the video item.
                 </p>
                 <p>
-                    Sign in with Google account to add/edit/delete your own
-                    video notes.
+                    Sign in to add/edit/delete your own video notes. You can
+                    sign up by entering a valid email address.
                 </p>
                 <p>
-                    Your Google account will only be used to create an user id
-                    for identifying your video notes. No personal data is
-                    collected.
+                    Your account will only be used to create an user id for
+                    identifying your video notes. No personal data is collected.
                 </p>
                 <i className="github icon"></i>
                 <a href="https://github.com/leonwongprsn/react-crud-videonote-app">
@@ -160,8 +162,12 @@ class StreamList extends React.Component {
     };
 
     render() {
+        console.log(this.auth);
         return (
             <div>
+                {this.props.isSignedIn && (
+                    <h1>Welcome {this.auth.currentUser.email}</h1>
+                )}
                 <h2>Notes</h2>
                 {this.renderTutorialButton()}
                 <div className="ui celled list">{this.renderList()}</div>

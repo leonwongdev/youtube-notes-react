@@ -70,7 +70,8 @@ class StreamShow extends React.Component {
 
         return (
             <>
-                <h4>{title}</h4>
+                <h4>{"Title: " + title}</h4>
+                <h5>Description:</h5>
                 <p
                     style={{
                         whiteSpace: "pre-line",
