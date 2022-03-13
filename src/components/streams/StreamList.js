@@ -108,9 +108,14 @@ class StreamList extends React.Component {
         return (
             <div>
                 <p>
-                    This is a demo app for react crud application. You can add
-                    your favorite CS youtube video to the list or view other
-                    users' favorite videos. You can also add your own
+                    <strong>
+                        This is a demo app for react CRUD application. React.js
+                        frontend and Spring boot for backend.
+                    </strong>
+                </p>
+                <p>
+                    You can add your favorite CS youtube video to the list or
+                    view other users' favorite videos. You can also add your own
                     reviews/notes to the video item.
                 </p>
                 <p>
@@ -118,8 +123,9 @@ class StreamList extends React.Component {
                     sign up by entering a valid email address.
                 </p>
                 <p>
-                    Your account will only be used to create an user id for
-                    identifying your video notes. No personal data is collected.
+                    Your account will only be used to create an unique user id
+                    for identifying your video notes. No personal data is
+                    collected.
                 </p>
                 <i className="github icon"></i>
                 <a href="https://github.com/leonwongprsn/react-crud-videonote-app">
