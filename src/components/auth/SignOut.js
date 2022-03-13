@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../actions";
 import firebaseApp from "../../firebase/Firebase";
@@ -6,13 +6,6 @@ import { getAuth } from "firebase/auth";
 
 const SignOut = (props) => {
     const auth = getAuth(firebaseApp);
-
-    // useEffect(() => {
-    //     const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
-    //         onAuthChange(!!user);
-    //     });
-    //     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    // }, []);
 
     const onSignOutClick = () => {
         auth.signOut();

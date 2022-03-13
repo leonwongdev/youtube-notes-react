@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import SignOut from "./auth/SignOut";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../actions";
-import SignIn from "./auth/SignIn";
 
 const Header = (props) => {
     const renderSignInButton = () => {

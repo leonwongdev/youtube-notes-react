@@ -1,11 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebaseApp from "../../firebase/Firebase";
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    EmailAuthProvider,
-} from "firebase/auth";
+import { getAuth, EmailAuthProvider } from "firebase/auth";
 import history from "../../history";
 
 import { connect } from "react-redux";
