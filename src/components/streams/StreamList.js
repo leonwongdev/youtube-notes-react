@@ -174,6 +174,12 @@ class StreamList extends React.Component {
                     <h1>Welcome {this.auth.currentUser.email}</h1>
                 )}
                 <h2>Notes</h2>
+                <strong style={{ color: "red" }}>
+                    If there are no notes, try refresh the page after a few
+                    seconds to retrieve data again. The backend server is host
+                    on heroku which will sleep if inactive for 30mins. Sorry for
+                    the inconvenience!
+                </strong>
                 {this.renderTutorialButton()}
                 <div className="ui celled list">{this.renderList()}</div>
                 {this.renderCreate()}

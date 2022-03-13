@@ -7,8 +7,6 @@ import htmlToDraft from "html-to-draftjs";
 import "../style/editor.css";
 // import { convertFromRaw } from "draft-js";
 
-let defaultContent = "<div>Type your notes here</div>";
-
 class EditorConvertToHTML extends Component {
     // state = {
     //     editorState: EditorState.createEmpty(),
@@ -23,10 +21,10 @@ class EditorConvertToHTML extends Component {
         //     "editor component constructor content: ",
         //     this.props.initialNote.content
         // );
+        let defaultContent = "<div>Type your notes here</div>";
         defaultContent = !this.props.initialNote
             ? defaultContent
             : this.props.initialNote;
-        // console.log("editor component constructor content after: ", content);
 
         const blocksFromHtml = htmlToDraft(defaultContent);
         const { contentBlocks, entityMap } = blocksFromHtml;
