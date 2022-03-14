@@ -1,15 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { fetchStreams } from "../../actions";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
+import {fetchStreams} from "../../actions";
 import Modal from "../Modal";
 import firebaseApp from "../../firebase/Firebase";
-import { getAuth } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 
-class StreamList extends React.Component {
+class NoteList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { showedTutorial: true };
+        this.state = {showedTutorial: true};
         this.auth = getAuth(firebaseApp);
     }
 
@@ -57,7 +57,7 @@ class StreamList extends React.Component {
             return (
                 <div className="item" key={stream.id}>
                     {this.renderAdmin(stream)}
-                    <i className="large middle aligned icon video" />
+                    <i className="large middle aligned icon video"/>
                     {/* <img
             className="ui mini image"
             src="https://www.youtube.com/img/desktop/yt_1200.png"
@@ -76,7 +76,7 @@ class StreamList extends React.Component {
     renderCreate() {
         if (this.props.isSignedIn && this.props.streams) {
             return (
-                <div style={{ textAlign: "right" }}>
+                <div style={{textAlign: "right"}}>
                     <Link to="/streams/new" className="ui button primary">
                         Add Your Favorite CS Video
                     </Link>
@@ -87,7 +87,7 @@ class StreamList extends React.Component {
 
     renderTutorialButton() {
         return (
-            <div style={{ textAlign: "left" }}>
+            <div style={{textAlign: "left"}}>
                 <button
                     className="ui button green"
                     onClick={() => {
@@ -174,7 +174,7 @@ class StreamList extends React.Component {
                     <h1>Welcome {this.auth.currentUser.email}</h1>
                 )}
                 <h2>Notes</h2>
-                <strong style={{ color: "red" }}>
+                <strong style={{color: "red"}}>
                     If there are no notes, try refresh the page after a few
                     seconds to retrieve data again. The backend server is host
                     on heroku which will sleep if inactive for 30mins. Sorry for
@@ -197,4 +197,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchStreams })(StreamList);
+export default connect(mapStateToProps, {fetchStreams})(NoteList);

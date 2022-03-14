@@ -1,9 +1,9 @@
 import React from "react";
-import { Field, reduxForm } from "redux-form";
+import {Field, reduxForm} from "redux-form";
 import EditorConvertToHTML from "../EditorConvertToHTML";
 
-class StreamForm extends React.Component {
-    renderError({ error, touched }) {
+class NoteForm extends React.Component {
+    renderError({error, touched}) {
         if (touched && error) {
             return (
                 <div className="ui error message">
@@ -13,7 +13,7 @@ class StreamForm extends React.Component {
         }
     }
 
-    renderInput = ({ input, label, meta }) => {
+    renderInput = ({input, label, meta}) => {
         const className = `field ${meta.error && meta.touched ? "error" : ""}`;
         return (
             <div className={className}>
@@ -57,7 +57,7 @@ class StreamForm extends React.Component {
         //     "label": "Enter Description"
         // }
 
-        const { input, label, meta } = theObjectFromField;
+        const {input, label, meta} = theObjectFromField;
         const className = `field ${meta.error && meta.touched ? "error" : ""}`;
 
         // console.log("renderDescription: ", input.value); // ReduxForm has props: initialValues -> input.value
@@ -76,7 +76,7 @@ class StreamForm extends React.Component {
     };
 
     renderNotes = (theObjectFromFieldComponent) => {
-        const { input, label, meta } = theObjectFromFieldComponent;
+        const {input, label, meta} = theObjectFromFieldComponent;
         const className = `field ${meta.error && meta.touched ? "error" : ""}`;
 
         // console.log("renderNotes: ", input.value);
@@ -157,4 +157,4 @@ const validate = (formValues) => {
 export default reduxForm({
     form: "streamForm",
     validate,
-})(StreamForm);
+})(NoteForm);

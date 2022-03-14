@@ -1,17 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import { fetchStream, deleteStream } from "../../actions";
+import {fetchStream, deleteStream} from "../../actions";
 
-class StreamDelete extends React.Component {
+class NoteDelete extends React.Component {
     componentDidMount() {
         this.props.fetchStream(this.props.match.params.id);
     }
 
     renderActions() {
-        const { id } = this.props.match.params;
+        const {id} = this.props.match.params;
 
         return (
             <React.Fragment>
@@ -49,9 +49,9 @@ class StreamDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { stream: state.streams[ownProps.match.params.id] };
+    return {stream: state.streams[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, { fetchStream, deleteStream })(
-    StreamDelete
+export default connect(mapStateToProps, {fetchStream, deleteStream})(
+    NoteDelete
 );

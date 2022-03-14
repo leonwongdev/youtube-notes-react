@@ -1,25 +1,25 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchStream, editStream } from "../../actions";
-import StreamForm from "./StreamForm";
+import {connect} from "react-redux";
+import {fetchStream, editStream} from "../../actions";
+import StreamForm from "./NoteForm";
 import _ from "lodash";
 
-class StreamShow extends React.Component {
+class NoteShow extends React.Component {
     constructor(props) {
         super(props);
         this.videoRef = React.createRef();
-        this.state = { editMode: false };
+        this.state = {editMode: false};
     }
 
     componentDidMount() {
-        // console.log("StreamShow componentDidMount called");
-        const { id } = this.props.match.params;
+        // console.log("NoteShow componentDidMount called");
+        const {id} = this.props.match.params;
         this.props.fetchStream(id);
     }
 
     onSubmit = (formValues) => {
         this.props.editStream(this.props.match.params.id, formValues, () => {
-            this.setState({ editMode: false });
+            this.setState({editMode: false});
         });
     };
 
@@ -49,7 +49,7 @@ class StreamShow extends React.Component {
             <button
                 className="ui button primary"
                 onClick={() => {
-                    this.setState({ editMode: !this.state.editMode });
+                    this.setState({editMode: !this.state.editMode});
                 }}
             >
                 {this.state.editMode ? "Cancel" : "Edit"}
@@ -57,14 +57,14 @@ class StreamShow extends React.Component {
         );
     }
 
-    renderContent({ title, description, content }) {
-        // console.log("StreamShow renderContent");
+    renderContent({title, description, content}) {
+        // console.log("NoteShow renderContent");
         if (this.state.editMode) {
             return null;
         }
 
         if (!content) {
-            console.error("StreamShow: Error loading note data.");
+            console.error("NoteShow: Error loading note data.");
             content = "<i>Something wrong in displaying notes</i>";
         }
 
@@ -80,7 +80,7 @@ class StreamShow extends React.Component {
                     {description}
                 </p>
                 <h4>Note:</h4>
-                <div dangerouslySetInnerHTML={{ __html: content }}></div>
+                <div dangerouslySetInnerHTML={{__html: content}}></div>
             </>
         );
     }
@@ -92,7 +92,7 @@ class StreamShow extends React.Component {
             return <div>Loading...</div>;
         }
 
-        const { url } = this.props.stream;
+        const {url} = this.props.stream;
 
         const embededUrl = url.replace(
             "https://www.youtube.com/watch?v=",
@@ -101,7 +101,7 @@ class StreamShow extends React.Component {
         return (
             <div className="stream-show-container">
                 <div className="ui embed video">
-                    <iframe title="video player" src={embededUrl} />
+                    <iframe title="video player" src={embededUrl}/>
                 </div>
                 <div className="ui segment note">
                     {this.renderEditButton()}
@@ -120,6 +120,6 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-export default connect(mapStateToProps, { fetchStream, editStream })(
-    StreamShow
+export default connect(mapStateToProps, {fetchStream, editStream})(
+    NoteShow
 );

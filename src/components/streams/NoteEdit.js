@@ -1,10 +1,10 @@
 import _ from "lodash";
 import React from "react";
-import { connect } from "react-redux";
-import { fetchStream, editStream } from "../../actions";
-import StreamForm from "./StreamForm";
+import {connect} from "react-redux";
+import {fetchStream, editStream} from "../../actions";
+import StreamForm from "./NoteForm";
 
-class StreamEdit extends React.Component {
+class NoteEdit extends React.Component {
     componentDidMount() {
         this.props.fetchStream(this.props.match.params.id);
     }
@@ -38,9 +38,9 @@ class StreamEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { stream: state.streams[ownProps.match.params.id] };
+    return {stream: state.streams[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, { fetchStream, editStream })(
-    StreamEdit
+export default connect(mapStateToProps, {fetchStream, editStream})(
+    NoteEdit
 );
