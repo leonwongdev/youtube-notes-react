@@ -1,7 +1,7 @@
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_OUT = 'SIGN_OUT';
-export const CREATE_STREAM = 'CREATE_STREAM';
-export const FETCH_STREAMS = 'FETCH_STREAMS';
-export const FETCH_STREAM = 'FETCH_STREAM';
-export const DELETE_STREAM = 'DELETE_STREAM';
-export const EDIT_STREAM = 'EDIT_STREAM';
+export const CREATE_NOTE = 'CREATE_NOTE';
+export const FETCH_NOTES = 'FETCH_NOTES';
+export const FETCH_NOTE = 'FETCH_NOTE';
+export const DELETE_NOTE = 'DELETE_NOTE';
+export const EDIT_NOTE = 'EDIT_NOTE';

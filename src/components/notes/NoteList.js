@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import {fetchStreams} from "../../actions";
+import {fetchNotes} from "../../actions";
 import Modal from "../Modal";
 import firebaseApp from "../../firebase/Firebase";
 import {getAuth} from "firebase/auth";
@@ -14,23 +14,21 @@ class NoteList extends React.Component {
     }
 
     componentDidMount() {
-        this.props.fetchStreams();
+        this.props.fetchNotes();
     }
 
-    renderAdmin(stream) {
-        if (stream == null || this.props.currentUserId == null) {
-            return null;
-        } else if (stream.userId === this.props.currentUserId) {
+    renderAdmin(note) {
+        if (note.userId === this.props.currentUserId) {
             return (
                 <div className="right floated content">
                     <Link
-                        to={`/streams/${stream.id}`}
+                        to={`/notes/${note.id}`}
                         className="ui button primary"
                     >
                         View
                     </Link>
                     <Link
-                        to={`/streams/delete/${stream.id}`}
+                        to={`/notes/delete/${note.id}`}
                         className="ui button negative"
                     >
                         Delete
@@ -47,7 +45,7 @@ class NoteList extends React.Component {
     }
 
     renderList() {
-        if (!this.props.streams) {
+        if (!this.props.notes) {
             return (
                 <div className="ui segment">
                     <p></p>
@@ -57,19 +55,19 @@ class NoteList extends React.Component {
                 </div>
             );
         }
-        return this.props.streams.map((stream) => {
+        return this.props.notes.map((note) => {
             const content =
-                stream.description.length > 100
-                    ? stream.description.substring(0, 100) + " ... Read More"
-                    : stream.description;
+                note.description.length > 100
+                    ? note.description.substring(0, 100) + " ... Read More"
+                    : note.description;
             return (
-                <div className="item" key={stream.id}>
-                    {this.renderAdmin(stream)}
+                <div className="item" key={note.id}>
+                    {this.renderAdmin(note)}
                     <i className="large middle aligned icon video"/>
 
                     <div className="content">
-                        <Link to={`/streams/${stream.id}`} className="header">
-                            {stream.title}
+                        <Link to={`/notes/${note.id}`} className="header">
+                            {note.title}
                         </Link>
                         <div className="description">{content}</div>
                     </div>
@@ -79,10 +77,10 @@ class NoteList extends React.Component {
     }
 
     renderCreate() {
-        if (this.props.isSignedIn && this.props.streams) {
+        if (this.props.isSignedIn && this.props.notes) {
             return (
                 <div style={{textAlign: "right"}}>
-                    <Link to="/streams/new" className="ui button primary">
+                    <Link to="/notes/new" className="ui button primary">
                         Add Your Favorite CS Video
                     </Link>
                 </div>
@@ -126,6 +124,9 @@ class NoteList extends React.Component {
                 <p>
                     Sign in to add/edit/delete your own video notes. You can
                     sign up by entering a valid email address.
+                </p>
+                <p>
+                    <strong style={{color: "orangered"}}>Test account is provided in sign in page.</strong>
                 </p>
                 <p>
                     Your account will only be used to create an unique user id
@@ -196,10 +197,10 @@ class NoteList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        streams: Object.values(state.streams),
+        notes: Object.values(state.notes),
         currentUserId: state.auth.userId,
         isSignedIn: state.auth.isSignedIn,
     };
 };
 
-export default connect(mapStateToProps, {fetchStreams})(NoteList);
+export default connect(mapStateToProps, {fetchNotes})(NoteList);

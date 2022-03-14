@@ -1,10 +1,10 @@
 import React from "react";
 import {Router, Route, Switch} from "react-router-dom";
-import NoteCreate from "./streams/NoteCreate";
-import NoteEdit from "./streams/NoteEdit";
-import NoteDelete from "./streams/NoteDelete";
-import NoteList from "./streams/NoteList";
-import NoteShow from "./streams/NoteShow";
+import NoteCreate from "./notes/NoteCreate";
+import NoteEdit from "./notes/NoteEdit";
+import NoteDelete from "./notes/NoteDelete";
+import NoteList from "./notes/NoteList";
+import NoteShow from "./notes/NoteShow";
 import Header from "./Header";
 import history from "../history";
 import "../style/app.css";
@@ -19,22 +19,22 @@ const App = () => {
                     <Switch>
                         <Route path="/" exact component={NoteList}/>
                         <Route
-                            path="/streams/new"
+                            path="/notes/new"
                             exact
                             component={NoteCreate}
                         />
                         <Route
-                            path="/streams/edit/:id"
+                            path="/notes/edit/:id"
                             exact
                             component={NoteEdit}
                         />
                         <Route
-                            path="/streams/delete/:id"
+                            path="/notes/delete/:id"
                             exact
                             component={NoteDelete}
                         />
                         <Route
-                            path="/streams/:id"
+                            path="/notes/:id"
                             exact
                             component={NoteShow}
                         />

@@ -58,9 +58,7 @@ const SignIn = (props) => {
             props.signOut();
         }
     };
-
-    console.log("Firebase auth.currentUser object: ", auth.currentUser);
-    console.log("props.isSignedIn: ", props.isSignedIn);
+    
     if (!props.isSignedIn) {
         if (props.isSignedIn === null) {
             return <></>;

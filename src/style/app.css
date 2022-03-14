@@ -18,10 +18,11 @@
     } */
 }
 
-.stream-show-container {
+.note-show-container {
     display: flex;
     flex-wrap: wrap;
 }
+
 .video {
     width: 500px;
     flex-grow: 1;

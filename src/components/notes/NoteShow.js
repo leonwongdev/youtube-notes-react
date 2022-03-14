@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {fetchStream, editStream} from "../../actions";
-import StreamForm from "./NoteForm";
+import {fetchNote, editNote} from "../../actions";
+import NoteForm from "./NoteForm";
 import _ from "lodash";
 
 class NoteShow extends React.Component {
@@ -14,11 +14,11 @@ class NoteShow extends React.Component {
     componentDidMount() {
         // console.log("NoteShow componentDidMount called");
         const {id} = this.props.match.params;
-        this.props.fetchStream(id);
+        this.props.fetchNote(id);
     }
 
     onSubmit = (formValues) => {
-        this.props.editStream(this.props.match.params.id, formValues, () => {
+        this.props.editNote(this.props.match.params.id, formValues, () => {
             this.setState({editMode: false});
         });
     };
@@ -28,9 +28,9 @@ class NoteShow extends React.Component {
             return null;
         }
         return (
-            <StreamForm
+            <NoteForm
                 initialValues={_.pick(
-                    this.props.stream,
+                    this.props.note,
                     "title",
                     "description",
                     "url",
@@ -42,7 +42,7 @@ class NoteShow extends React.Component {
     }
 
     renderEditButton() {
-        if (this.props.stream.userId !== this.props.currentUserId) {
+        if (this.props.note.userId !== this.props.currentUserId) {
             return null;
         }
         return (
@@ -86,26 +86,26 @@ class NoteShow extends React.Component {
     }
 
     render() {
-        if (!this.props.stream) {
+        if (!this.props.note) {
             //this will cause trouble for the this.player.attachMediaElement(this.videoRef.current);
-            // because when it first render we dun have stream in redux store untill fetchStreams complete
+            // because when it first render we dun have note in redux store untill fetchNotes complete
             return <div>Loading...</div>;
         }
 
-        const {url} = this.props.stream;
+        const {url} = this.props.note;
 
         const embededUrl = url.replace(
             "https://www.youtube.com/watch?v=",
             "https://www.youtube.com/embed/"
         );
         return (
-            <div className="stream-show-container">
+            <div className="note-show-container">
                 <div className="ui embed video">
                     <iframe title="video player" src={embededUrl}/>
                 </div>
                 <div className="ui segment note">
                     {this.renderEditButton()}
-                    {this.renderContent(this.props.stream)}
+                    {this.renderContent(this.props.note)}
                     {this.renderEditForm()}
                 </div>
             </div>
@@ -115,11 +115,11 @@ class NoteShow extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        stream: state.streams[ownProps.match.params.id],
+        note: state.notes[ownProps.match.params.id],
         currentUserId: state.auth.userId,
     };
 };
 
-export default connect(mapStateToProps, {fetchStream, editStream})(
+export default connect(mapStateToProps, {fetchNote, editNote})(
     NoteShow
 );

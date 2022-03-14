@@ -3,11 +3,11 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import Modal from "../Modal";
 import history from "../../history";
-import {fetchStream, deleteStream} from "../../actions";
+import {fetchNote, deleteNote} from "../../actions";
 
 class NoteDelete extends React.Component {
     componentDidMount() {
-        this.props.fetchStream(this.props.match.params.id);
+        this.props.fetchNote(this.props.match.params.id);
     }
 
     renderActions() {
@@ -16,7 +16,7 @@ class NoteDelete extends React.Component {
         return (
             <React.Fragment>
                 <button
-                    onClick={() => this.props.deleteStream(id)}
+                    onClick={() => this.props.deleteNote(id)}
                     className="ui button negative"
                 >
                     Delete
@@ -29,11 +29,11 @@ class NoteDelete extends React.Component {
     }
 
     renderContent() {
-        if (!this.props.stream) {
+        if (!this.props.note) {
             return "Are you sure you want to delete this note?";
         }
 
-        return `Are you sure you want to delete the note with title: ${this.props.stream.title}`;
+        return `Are you sure you want to delete the note with title: ${this.props.note.title}`;
     }
 
     render() {
@@ -49,9 +49,9 @@ class NoteDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {stream: state.streams[ownProps.match.params.id]};
+    return {note: state.notes[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, {fetchStream, deleteStream})(
+export default connect(mapStateToProps, {fetchNote, deleteNote})(
     NoteDelete
 );

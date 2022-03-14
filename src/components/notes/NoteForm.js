@@ -45,7 +45,7 @@ class NoteForm extends React.Component {
         //         "autofilled": false,
         //         "dirty": false,
         //         "error": "You must enter a description",
-        //         "form": "streamForm",
+        //         "form": "noteForm",
         //         "invalid": true,
         //         "pristine": true,
         //         "submitting": false,
@@ -93,7 +93,6 @@ class NoteForm extends React.Component {
     };
 
     onSubmit = (formValues) => {
-        console.log("stream form onSubmit called");
         this.props.onSubmit(formValues);
     };
 
@@ -155,6 +154,6 @@ const validate = (formValues) => {
 };
 
 export default reduxForm({
-    form: "streamForm",
+    form: "noteForm",
     validate,
 })(NoteForm);

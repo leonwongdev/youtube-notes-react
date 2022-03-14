@@ -1,30 +1,30 @@
 import _ from "lodash";
 import React from "react";
 import {connect} from "react-redux";
-import {fetchStream, editStream} from "../../actions";
-import StreamForm from "./NoteForm";
+import {fetchNote, editNote} from "../../actions";
+import NoteForm from "./NoteForm";
 
 class NoteEdit extends React.Component {
     componentDidMount() {
-        this.props.fetchStream(this.props.match.params.id);
+        this.props.fetchNote(this.props.match.params.id);
     }
 
     onSubmit = (formValues) => {
-        console.log("stream edit:", formValues);
-        this.props.editStream(this.props.match.params.id, formValues);
+        console.log("NoteEdit onSubmit:", formValues);
+        this.props.editNote(this.props.match.params.id, formValues);
     };
 
     render() {
-        if (!this.props.stream) {
+        if (!this.props.note) {
             return <div>Loading...</div>;
         }
 
         return (
             <div>
                 <h3>Edit a note</h3>
-                <StreamForm
+                <NoteForm
                     initialValues={_.pick(
-                        this.props.stream,
+                        this.props.note,
                         "title",
                         "description",
                         "url",
@@ -38,9 +38,9 @@ class NoteEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return {stream: state.streams[ownProps.match.params.id]};
+    return {note: state.notes[ownProps.match.params.id]};
 };
 
-export default connect(mapStateToProps, {fetchStream, editStream})(
+export default connect(mapStateToProps, {fetchNote, editNote})(
     NoteEdit
 );
