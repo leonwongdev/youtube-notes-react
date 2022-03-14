@@ -18,7 +18,9 @@ class NoteList extends React.Component {
     }
 
     renderAdmin(stream) {
-        if (stream.userId === this.props.currentUserId) {
+        if (stream == null || this.props.currentUserId == null) {
+            return null;
+        } else if (stream.userId === this.props.currentUserId) {
             return (
                 <div className="right floated content">
                     <Link
@@ -33,6 +35,12 @@ class NoteList extends React.Component {
                     >
                         Delete
                     </Link>
+                </div>
+            );
+        } else {
+            return (
+                <div className="right floated content">
+                    <div style={{fontSize: "0.8rem"}}> Read-only note created by other user</div>
                 </div>
             );
         }
@@ -58,10 +66,7 @@ class NoteList extends React.Component {
                 <div className="item" key={stream.id}>
                     {this.renderAdmin(stream)}
                     <i className="large middle aligned icon video"/>
-                    {/* <img
-            className="ui mini image"
-            src="https://www.youtube.com/img/desktop/yt_1200.png"
-          /> */}
+
                     <div className="content">
                         <Link to={`/streams/${stream.id}`} className="header">
                             {stream.title}

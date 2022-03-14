@@ -1,25 +1,26 @@
-import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, {useEffect, useRef} from "react";
+import {Link} from "react-router-dom";
 import SignOut from "./auth/SignOut";
-import { connect } from "react-redux";
-import { signIn, signOut } from "../actions";
+import {connect} from "react-redux";
+import {signIn, signOut} from "../actions";
 import firebaseApp from "../firebase/Firebase";
-import { getAuth } from "firebase/auth";
+import {getAuth} from "firebase/auth";
 
 const Header = (props) => {
     const auth = getAuth(firebaseApp);
-    const handleAuthChange = useRef(() => {});
+    const handleAuthChange = useRef(() => {
+    });
 
     useEffect(() => {
         const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
-            handleAuthChange.current(!!user);
+            handleAuthChange.current(!!user, user);
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
     }, [auth]);
 
-    handleAuthChange.current = (isSignedIn) => {
+    handleAuthChange.current = (isSignedIn, user) => {
         if (isSignedIn) {
-            props.signIn(auth.currentUser.uid);
+            props.signIn(user.uid);
         } else {
             props.signOut();
         }
@@ -31,7 +32,7 @@ const Header = (props) => {
                 <Link
                     to="/signIn"
                     className="tiny ui blue button"
-                    style={{ margin: "5px" }}
+                    style={{margin: "5px"}}
                 >
                     Sign In
                 </Link>
@@ -50,14 +51,14 @@ const Header = (props) => {
                 </Link>
                 {/* <GoogleAuth /> */}
                 {renderSignInButton()}
-                <SignOut />
+                <SignOut/>
             </div>
         </div>
     );
 };
 
 const mapStateToProps = (state) => {
-    return { isSignedIn: state.auth.isSignedIn };
+    return {isSignedIn: state.auth.isSignedIn};
 };
 
-export default connect(mapStateToProps, { signIn, signOut })(Header);
+export default connect(mapStateToProps, {signIn, signOut})(Header);
