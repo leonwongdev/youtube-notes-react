@@ -100,10 +100,10 @@ class NoteShow extends React.Component {
         );
         return (
             <div className="note-show-container">
-                <div className="ui embed video">
-                    <iframe title="video player" src={embededUrl}/>
+                <div className="ui video flex-col">
+                    <iframe className="video-player" title="video player" src={embededUrl}/>
                 </div>
-                <div className="ui segment note">
+                <div className="ui segment note flex-col">
                     {this.renderEditButton()}
                     {this.renderContent(this.props.note)}
                     {this.renderEditForm()}
