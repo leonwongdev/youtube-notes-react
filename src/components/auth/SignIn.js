@@ -1,11 +1,11 @@
-import React, {useEffect, useRef} from "react";
+import React, { useCallback, useEffect } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebaseApp from "../../firebase/Firebase";
-import {getAuth, EmailAuthProvider} from "firebase/auth";
+import { getAuth, EmailAuthProvider } from "firebase/auth";
 import history from "../../history";
 
-import {connect} from "react-redux";
-import {signIn, signOut} from "../../actions";
+import { connect } from "react-redux";
+import { signIn, signOut } from "../../actions";
 
 const uiConfig = {
     // Popup signin flow rather than redirect flow.
@@ -36,29 +36,28 @@ const uiConfig = {
 };
 
 const SignIn = (props) => {
-    // console.log("Firebase object: ", firebaseApp);
-
     const auth = getAuth(firebaseApp);
-    const handleAuthChange = useRef(() => {
-    });
+
+    const handleAuthChange = useCallback(
+        (isSignedIn, user) => {
+            if (isSignedIn) {
+                props.signIn(user.uid);
+                // go back home page after sign in
+                history.push("/");
+            } else {
+                props.signOut();
+            }
+        },
+        [props]
+    );
 
     useEffect(() => {
         const unregisterAuthObserver = auth.onAuthStateChanged((user) => {
-            handleAuthChange.current(!!user, user);
+            handleAuthChange(!!user, user);
         });
         return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-    }, [auth]);
+    }, [auth, handleAuthChange]);
 
-    handleAuthChange.current = (isSignedIn, user) => {
-        if (isSignedIn) {
-            props.signIn(user.uid);
-            // go back home page after sign in
-            history.push("/");
-        } else {
-            props.signOut();
-        }
-    };
-    
     if (!props.isSignedIn) {
         if (props.isSignedIn === null) {
             return <></>;
@@ -73,7 +72,7 @@ const SignIn = (props) => {
                 <p>Test account email: admin@test.com</p>
                 <p>Test account password: password</p>
                 {/* <h2>{JSON.stringify(auth.currentUser)}</h2> */}
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth}/>
+                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
             </>
         );
     }
@@ -86,7 +85,7 @@ const SignIn = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    return {isSignedIn: state.auth.isSignedIn};
+    return { isSignedIn: state.auth.isSignedIn };
 };
 
-export default connect(mapStateToProps, {signIn, signOut})(SignIn);
+export default connect(mapStateToProps, { signIn, signOut })(SignIn);
