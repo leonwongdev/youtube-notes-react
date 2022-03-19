@@ -1,15 +1,15 @@
 import React from "react";
-import {connect} from "react-redux";
-import {Link} from "react-router-dom";
-import {fetchNotes} from "../../actions";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { fetchNotes } from "../../actions";
 import Modal from "../Modal";
 import firebaseApp from "../../firebase/Firebase";
-import {getAuth} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 class NoteList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {showedTutorial: true};
+        this.state = { showedTutorial: true };
         this.auth = getAuth(firebaseApp);
     }
 
@@ -38,7 +38,10 @@ class NoteList extends React.Component {
         } else {
             return (
                 <div className="right floated content">
-                    <div style={{fontSize: "0.8rem"}}> Read-only note created by other user</div>
+                    <div style={{ fontSize: "0.8rem" }}>
+                        {" "}
+                        Read-only note created by other user
+                    </div>
                 </div>
             );
         }
@@ -63,7 +66,7 @@ class NoteList extends React.Component {
             return (
                 <div className="item" key={note.id}>
                     {this.renderAdmin(note)}
-                    <i className="large middle aligned icon video"/>
+                    <i className="large middle aligned icon video" />
 
                     <div className="content">
                         <Link to={`/notes/${note.id}`} className="header">
@@ -79,7 +82,7 @@ class NoteList extends React.Component {
     renderCreate() {
         if (this.props.isSignedIn && this.props.notes) {
             return (
-                <div style={{textAlign: "right"}}>
+                <div style={{ textAlign: "right" }}>
                     <Link to="/notes/new" className="ui button primary">
                         Add Your Favorite CS Video
                     </Link>
@@ -90,7 +93,7 @@ class NoteList extends React.Component {
 
     renderTutorialButton() {
         return (
-            <div style={{textAlign: "left"}}>
+            <div style={{ textAlign: "left" }}>
                 <button
                     className="ui button green"
                     onClick={() => {
@@ -101,7 +104,7 @@ class NoteList extends React.Component {
                         });
                     }}
                 >
-                    Tutorial
+                    Tutorial & Source Code
                 </button>
             </div>
         );
@@ -126,16 +129,29 @@ class NoteList extends React.Component {
                     sign up by entering a valid email address.
                 </p>
                 <p>
-                    <strong style={{color: "orangered"}}>Test account is provided in sign in page.</strong>
+                    <strong style={{ color: "orangered" }}>
+                        Test account is provided in sign in page.
+                    </strong>
                 </p>
                 <p>
                     Your account will only be used to create an unique user id
                     for identifying your video notes. No personal data is
                     collected.
                 </p>
-                <i className="github icon"></i>
-                <a href="https://github.com/leonwongprsn/react-crud-videonote-app">
-                    Github repo
+
+                <a
+                    href="https://github.com/leonwongprsn/react-crud-videonote-app"
+                    target={"_blank"}
+                    rel="noreferrer"
+                >
+                    React Frontend Github repo<i className="github icon"></i>
+                </a>
+                <a
+                    href="https://github.com/leonwongprsn/youtube-note-server"
+                    target={"_blank"}
+                    rel="noreferrer"
+                >
+                    Spring Backend Github repo<i className="github icon"></i>
                 </a>
             </div>
         );
@@ -180,7 +196,7 @@ class NoteList extends React.Component {
                     <h1>Welcome {this.auth.currentUser.email}</h1>
                 )}
                 <h2>Notes</h2>
-                <strong style={{color: "red"}}>
+                <strong style={{ color: "red" }}>
                     If there are no notes, try refresh the page after a few
                     seconds to retrieve data again. The backend server is host
                     on heroku which will sleep if inactive for 30mins. Sorry for
@@ -203,4 +219,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, {fetchNotes})(NoteList);
+export default connect(mapStateToProps, { fetchNotes })(NoteList);
