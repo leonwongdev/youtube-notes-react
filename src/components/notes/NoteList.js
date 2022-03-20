@@ -48,9 +48,9 @@ class NoteList extends React.Component {
     }
 
     renderList() {
-        if (!this.props.notes) {
+        if (!this.props.notes || !this.props.notes.length) {
             return (
-                <div className="ui segment">
+                <div className="ui segment" style={{ height: "200px" }}>
                     <p></p>
                     <div className="ui active dimmer">
                         <div className="ui loader"></div>
@@ -196,11 +196,13 @@ class NoteList extends React.Component {
                     <h1>Welcome {this.auth.currentUser.email}</h1>
                 )}
                 <h2>Notes</h2>
-                <strong style={{ color: "red" }}>
-                    If there are no notes, try refresh the page after a few
-                    seconds to retrieve data again. The backend server is host
-                    on heroku which will sleep if inactive for 30mins. Sorry for
-                    the inconvenience!
+                <strong style={{ color: "orangered" }}>
+                    There should be at least one note item for demo purpose. If
+                    there are no notes, please wait for a few seconds. Normally
+                    the serer will response within 30s. The backend server is
+                    hosting on heroku which will sleep if it is inactive for
+                    half hour. Try refresh the page if it has been loading for
+                    over 30s. Sorry for the inconvenience!
                 </strong>
                 {this.renderTutorialButton()}
                 <div className="ui celled list">{this.renderList()}</div>
