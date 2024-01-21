@@ -173,7 +173,7 @@ class NoteList extends React.Component {
         <div>
           {" "}
           <a
-            href="https://github.com/leonwongdev/react-crud-videonote-app"
+            href="https://github.com/leonwongdev/youtube-notes-react"
             target={"_blank"}
             rel="noreferrer"
           >
