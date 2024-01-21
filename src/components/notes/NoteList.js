@@ -193,11 +193,10 @@ class NoteList extends React.Component {
 
         <h2>Notes</h2>
         <strong style={{ color: "orangered" }}>
-          There should be at least one note item for demo purpose. If there are
-          no notes, please wait for a few seconds. Normally the serer will
-          response within 30s. The backend server is hosting on heroku which
-          will sleep if it is inactive for half hour. Try refresh the page if it
-          has been loading for over 30s. Sorry for the inconvenience!
+          This is a web app for taking notes while watching youtube tutorials.
+          There should be at least one note item for demo purpose and a test
+          account is prepared on sign up page. Click the Sign up button on the
+          top right corner to start note-taking!
         </strong>
         {this.renderTutorialButton()}
         <div className="ui celled list">{this.renderList()}</div>
