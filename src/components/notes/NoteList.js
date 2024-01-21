@@ -110,7 +110,7 @@ class NoteList extends React.Component {
         <p>
           <strong>
             This is a demo app for react CRUD application. React.js frontend and
-            Spring boot for backend.
+            .Net 8 for backend.
           </strong>
         </p>
         <p>
@@ -119,7 +119,7 @@ class NoteList extends React.Component {
           video item.
         </p>
         <p>
-          Sign in to add/edit/delete your own video notes. You can sign up by
+          Sign in to add/edit/delete your own video notes. You can sign in by
           entering a valid email address.
         </p>
         <p>
@@ -195,7 +195,7 @@ class NoteList extends React.Component {
         <strong style={{ color: "orangered" }}>
           This is a web app for taking notes while watching youtube tutorials.
           There should be at least one note item for demo purpose and a test
-          account is prepared on sign up page. Click the Sign up button on the
+          account is prepared on sign in page. Click the sign in button on the
           top right corner to start note-taking!
         </strong>
         {this.renderTutorialButton()}
