@@ -1,4 +1,4 @@
-# YouTube Notes Web App
+# YouTube Notes Web App - Frontend
 
 This web app allows users to take notes while watching YouTube tutorials.
 
