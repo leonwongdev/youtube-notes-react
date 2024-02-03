@@ -140,14 +140,35 @@ const validate = (formValues) => {
 
   if (
     !formValues.url ||
-    !formValues.url.includes("https://www.youtube.com/watch?v=")
+    !validateVideoId(extractVideoId(formValues.url))
   ) {
     errors.url =
-      "You must enter a valid youtube link format. E.g. https://www.youtube.com/watch?v={video vode} or https://www.youtube.com/watch?v=b8fFRX0T38M";
+      "You must enter a valid youtube link format. E.g. https://www.youtube.com/watch?v={videoId} or https://youtu.be/{videoId}";
   }
 
   return errors;
 };
+
+export function extractVideoId(url) {
+  // Regular expressions to extract the video ID from YouTube URL
+  var regexStandard = /[?&]v=([^?&]+)/;
+  var regexShortened = /youtu\.be\/([^?&]+)/;
+  var matchStandard = url.match(regexStandard);
+  var matchShortened = url.match(regexShortened);
+
+  if (matchStandard && matchStandard[1]) {
+      return matchStandard[1];
+  } else if (matchShortened && matchShortened[1]) {
+      return matchShortened[1];
+  } else {
+    return false;
+  }
+}
+
+function validateVideoId(videoId) {
+  // Check if the video ID is a valid string (non-empty)
+  return typeof videoId === 'string' && videoId.trim() !== '';
+}
 
 export default reduxForm({
   form: "noteForm",
