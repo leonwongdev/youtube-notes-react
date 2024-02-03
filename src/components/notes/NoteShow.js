@@ -100,8 +100,7 @@ class NoteShow extends React.Component {
 
     // Construct the embed URL for the YouTube video
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
-    
-    console.log("🚀 ~ NoteShow ~ render ~ videoId:", videoId)
+
     return (
       <div className="note-show-container">
         <div className="ui video flex-col">
